@@ -25,7 +25,7 @@ const app = express();
 
 app.use(express.json());
 
-// eviter les erreurs de type CORS
+// Eviter les erreurs de type CORS
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Pour cette route on utilise sauceRoutes
-app.use('/api/sauce', sauceRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
 

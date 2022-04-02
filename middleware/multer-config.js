@@ -9,7 +9,7 @@ const MIME_TYPES = {
 
 // Enregistrer sur le disque
 const storage = multer.diskStorage({
-    destination: (res, file, callback) => {
+    destination: (req, file, callback) => {
     // Null pour pas d'erreurs puis enregistre dans le dossier images
     callback(null, 'images')
     },
@@ -22,4 +22,4 @@ const storage = multer.diskStorage({
     }
 });
 
-module.exports = multer({ storage }).single('image');
+module.exports = multer({storage}).single('image');

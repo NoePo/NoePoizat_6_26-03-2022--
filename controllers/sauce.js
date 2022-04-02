@@ -21,7 +21,7 @@ exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ?
         // Si existe
         {
-            ...JSON.parse(req.body.thing),
+            ...JSON.parse(req.body.sauce),
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
             // Si existe pas
         } : { ...req.body };
@@ -60,16 +60,51 @@ exports.deleteSauce = (req, res, next) => {
     );
 }
 
-// Trouver un objet par son identifiant
-exports.getOneSauce = (req, res, next) => {  // : = partie de la route dynamique
-    Sauce.findOne({ _id: req.params.id })
-        .then(sauce => res.status(200).json(thing))
-        .catch(error => res.status(404).json({ error }));
-}
-
 // Récupérer toutes les sauces
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
-        .then(sauces => res.status(200).json(sauces))
+        .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(400).json({ error }))
 }
+
+// Trouver une sauce par son identifiant
+exports.getOneSauce = (req, res, next) => {  // : = partie de la route dynamique
+    Sauce.findOne({ _id: req.params.id })
+        .then(sauce => res.status(200).json(sauce))
+        .catch(error => res.status(404).json({ error }))
+}
+
+// Like et dislike
+
+/* Il faut: l'ID de l'objet; pouvoir voir le nombre de like/dislike; limité à un par personne
+si t'as mis un like tu peux pas mettre un dislike en même temps*/ 
+exports.like = (req, res, next) => {
+    Sauce.findOne({ _id: req.params.id })
+    .then()
+    
+    
+    .catch(error => res.status(404).json ({error}))
+}
+
+
+
+
+
+// Pour vérifier le mec qui fait 
+/*
+Sauce.findOne({ _id: req.params.id }).then(
+    (sauce) => {
+        // Vérifier que l'utilisateur qui fait la suppresion est bien propriétaire de la sauce
+        if (!sauce) {
+            return res.status(404).json({
+                error: new Error('Objet non trouvé !')
+            })
+        }
+        if (sauce.userId !== req.auth.userId) {
+            return res.status(401).json({
+                error: new Error('Requête non autorisée!')
+            });
+        }
+    }
+);
+*/
