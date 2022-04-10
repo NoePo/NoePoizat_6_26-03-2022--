@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
                 userId: user._id,
                 token: jwt.sign(
                     {userId: user._id}, // Sur que la requête correspond bien à l'ID
-                    'RANDOM_TOKEN_SECRET', // Normal chaîne de cractère plus longue et aléatoire
+                    'RANDOM_TOKEN_SECRET', // Normalement chaîne de cractère plus longue et aléatoire
                     {expiresIn: '24h'} // Chaque token dure 24h
                 )     
             });
